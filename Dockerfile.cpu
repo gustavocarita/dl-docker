@@ -219,6 +219,21 @@ RUN git clone --depth 1 https://github.com/opencv/opencv.git /root/opencv && \
 	echo 'ln /dev/null /dev/raw1394' >> ~/.bashrc
 
 
+RUN pip --no-cache-dir install tornado \
+ lxml \
+ bs4 \
+ pika \
+ dask[complete] \
+ pandas \
+ sklearn \
+ pandas-summary \
+ matplotlib \
+ seaborn \
+ bokeh \
+ holoviews \
+ missingno \
+ tqdm
+
 # Set up notebook config
 COPY jupyter_notebook_config.py /root/.jupyter/
 
