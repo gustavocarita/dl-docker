@@ -233,7 +233,6 @@ RUN git clone --depth 1 https://github.com/opencv/opencv.git /root/opencv && \
 
 RUN pip3 --no-cache-dir install html5lib \
 	tornado \
-	lxml \
 	bs4 \
 	pika \
 	dask[complete] \
@@ -241,15 +240,18 @@ RUN pip3 --no-cache-dir install html5lib \
 	sklearn \
 	pandas-summary \
 	matplotlib \
-	seaborn \
 	bokeh \
 	holoviews \
 	missingno \
 	tqdm
 
-RUN git clone --recursive https://github.com/dmlc/xgboost;cd xgboost;make -j4;python setup.py install;python3 setup.py install;
+# Instal XGBoost Library
+RUN git clone --recursive https://github.com/dmlc/xgboost && \
+    cd xgboost && \
+    make -j4 && \
+    cd python-package; python setup.py install
 
-RUN git clone https://github.com/bokeh/datashader.git;cd datashader;pip3 install -e .;
+RUN git clone https://github.com/bokeh/datashader.git;cd datashader;pip install -e .;
 
 # Set up notebook config
 COPY jupyter_notebook_config.py /root/.jupyter/
