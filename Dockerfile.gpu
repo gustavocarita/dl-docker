@@ -225,13 +225,13 @@ RUN git clone --depth 1 https://github.com/opencv/opencv.git /root/opencv && \
 	cd /root/opencv && \
 	mkdir build && \
 	cd build && \
-	cmake -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON .. && \
+	cmake -DCMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON .. && \
 	make -j"$(nproc)"  && \
 	make install && \
 	ldconfig && \
 	echo 'ln /dev/null /dev/raw1394' >> ~/.bashrc
 
-RUN pip3 --no-cache-dir install html5lib \
+RUN pip --no-cache-dir install html5lib \
 	tornado \
 	bs4 \
 	pika \
@@ -242,7 +242,6 @@ RUN pip3 --no-cache-dir install html5lib \
 	matplotlib \
 	bokeh \
 	holoviews \
-	missingno \
 	tqdm
 
 # Instal XGBoost Library
